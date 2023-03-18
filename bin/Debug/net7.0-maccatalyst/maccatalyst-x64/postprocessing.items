@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_PostProcessingItem Include="MAUI_Traveless.app/Contents/MacOS/MAUI_Traveless">
+      <BCSymbolMapName>MAUI_Traveless.bcsymbolmap</BCSymbolMapName>
+      <NoDSymUtil>true</NoDSymUtil>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>MAUI_Traveless.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SymbolFile>/Users/kevin1222/Desktop/SAIT/Winter_2023/CPRG_211_G/CPRG_211_GP2/MAUI_Traveless/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/mtouch-symbols.list</SymbolFile>
+      <DSymName>MAUI_Traveless.app.dSYM</DSymName>
+      <SourceProjectPath>/Users/kevin1222/Desktop/SAIT/Winter_2023/CPRG_211_G/CPRG_211_GP2/MAUI_Traveless</SourceProjectPath>
+    </_PostProcessingItem>
+  </ItemGroup>
+</Project>

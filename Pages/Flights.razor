@@ -1,0 +1,152 @@
+﻿@page "/flight"
+@using MAUI_Traveless.Data
+
+<div class="form">
+
+    <div class="row">
+        <h2 style="text-align: center; font-weight: normal">Flight Finder</h2>
+
+        <div id="from" class="col-sm">
+            <label>From:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Select a flight</option>
+                @foreach (var a in airports)
+                {
+                    <option value="@a.AirportCode">@a.AirportCode - @a.AirportName</option>
+                }
+            </select>
+        </div>
+
+        <div id="to" class="col-sm">
+            <label>To:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Select a flight</option>
+                @foreach (var a in airports)
+                {
+                    <option value="@a.AirportCode">@a.AirportCode - @a.AirportName</option>
+                }
+            </select>
+        </div>
+
+        <div id="day" class="col-sm">
+            <label>Day:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Select a day</option>
+                @foreach (var d in flights)
+                {
+                    <option value="@d.Day">@d.Day</option>
+                }
+            </select>
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary btn-md; form-control" style="margin-top: 24px">Find Flights</button>
+        </div>
+    </div>
+
+    <div id="divider" style="margin-bottom: 50px" />
+
+    <div class="row">
+        <h2 style="text-align: center; font-weight: normal">Flights</h2>
+
+        <div class="col-sm">
+            <select type="text" class="form-control" placeholder="Loading..." readonly />
+        </div>
+    </div>
+
+    <div id="divider"style="margin-bottom: 50px" />
+
+    <div class="row">
+        <h2 style="text-align: center; font-weight: normal">Reserve</h2>
+
+        <div id="flightCode" class="row-sm">
+            <label>Flight Code:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Select the flight</option>
+                @foreach (var fc in flights)
+                {
+                    <option value="@fc.FlightCode">@fc.FlightCode</option>
+                }
+            </select>
+        </div>
+
+        <div id="airline" class="row-sm">
+            <label>Airline:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Select the airline</option>
+                @foreach (var al in flights)
+                {
+                    <option value="@al.Airline">@al.Airline</option>
+                }
+            </select>
+        </div>
+
+        <div id="day" class="row-sm">
+            <label>Day:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Select the day</option>
+                @foreach (var d in flights)
+                {
+                    <option value="@d.Day">@d.Day</option>
+                }
+            </select>
+        </div>
+
+        <div id="time" class="row-sm">
+            <label>Time:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Select the time</option>
+                @foreach (var t in flights)
+                {
+                    <option value="@t.Time">@t.Time</option>
+                }
+            </select>
+        </div>
+
+        <div id="cost" class="row-sm">
+            <label>Cost:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>$0</option>
+                @foreach (var p in flights)
+                {
+                    <option value="@p.Price">$@p.Price</option>
+                }
+            </select>
+        </div>
+
+
+        <div class="row-sm">
+            <label id="name">Name:</label>
+            <input type="text" class="form-control" placeholder="Enter your name" />
+        </div>
+
+        <div class="row-sm">
+            <label id="citizenship">Citizenship:</label>
+            <input type="text" class="form-control" placeholder="Enter your citizenship" />
+        </div>
+
+        <div style="margin-bottom: 25px" />
+
+        <div class="text-center d-grid col-3 mx-auto">
+            <button type="submit" class="btn btn-primary">Reserve</button>
+        </div>
+
+        <div style="margin-bottom: 25px" />
+
+        <div class="text-center d-grid col-3 mx-auto">
+            <input type="text" class="form-control" placeholder="Reservation Code:" style="text-align:center" readonly />
+        </div>
+    </div>
+</div>
+
+@code
+{
+    FlightManager fm = new FlightManager();
+    List<Flight> flights = FlightManager.GetFlights();
+    List<Airport> airports = FlightManager.GetAirports();
+
+    string selectedFlight;
+
+    private void ShowFlightInfo(ChangeEventArgs f)
+    { selectedFlight = f.Value.ToString(); }
+}

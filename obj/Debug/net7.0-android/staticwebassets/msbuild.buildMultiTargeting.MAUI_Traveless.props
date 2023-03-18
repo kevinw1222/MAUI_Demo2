@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/MAUI_Traveless.props" />
+</Project>
