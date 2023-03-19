@@ -1,34 +1,47 @@
-﻿@page "/reservation"
+@page "/reservation"
 @using MAUI_Traveless.Data
 
 <div class="form">
 
     <div class="row">
         <h2 style="text-align: center; font-weight: normal">Reservation Finder</h2>
-        <div class="col-sm">
-            <label id="departure">Code:</label>
-            <input type="text" class="form-control" placeholder="Any" />
+
+        <div id="airCode" class="col-sm">
+            <label>Code:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Any</option>
+                @foreach (var c in airports)
+                {
+                    <option value="@c.AirportCode">@c.AirportCode</option>
+                }
+            </select>
         </div>
 
-        <div class="col-sm">
-            <label id="destination">Airline:</label>
-            <input type="text" class="form-control" placeholder="Any" />
+        <div id="airline" class="col-sm">
+            <label>Airline:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Any</option>
+                @foreach (var al in flights)
+                {
+                    <option value="@al.Airline">@al.Airline</option>
+                }
+            </select>
         </div>
 
         <div class="col-sm">
             <label id="date">Name:</label>
-            <input type="text" class="form-control" placeholder="Any"/>
+            <input type="text" class="form-control" placeholder="Any" />
         </div>
 
         <div class="col-auto">
             <button type="submit" class="btn btn-primary btn-md; form-control" style="margin-top: 24px">Find Reservations</button>
         </div>
-        <div style="margin-bottom: 50px" />
     </div>
 
+    <div id="divider" style="margin: 50px" />
 
     <div class="row">
-        <h2 style="text-align: center; font-weight: normal">Reservations</h2>
+        <h2 style="text-align: center">Reservations</h2>
         <div class="col-sm">
             <input type="text" class="form-control" placeholder="Loading..." readonly />
         </div>
@@ -44,19 +57,37 @@
             <input type="text" class="form-control" placeholder="Any" />
         </div>
 
-        <div class="row-sm">
-            <label id="flightCode">Flight Code:</label>
-            <input type="text" class="form-control" placeholder="Any" />
+        <div id="flightCode" class="col-sm">
+            <label>Flight Code:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Any</option>
+                @foreach (var fc in flights)
+                {
+                    <option value="@fc.FlightCode">@fc.FlightCode</option>
+                }
+            </select>
         </div>
 
-        <div class="row-sm">
-            <label id="airline">Airline:</label>
-            <input type="text" class="form-control" placeholder="Any" />
+        <div id="airline" class="col-sm">
+            <label>Airline:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Any</option>
+                @foreach (var al in flights)
+                {
+                    <option value="@al.Airline">@al.Airline</option>
+                }
+            </select>
         </div>
 
-        <div class="row-sm">
-            <label id="cost">Cost:</label>
-            <input type="number" class="form-control" placeholder="Any" />
+        <div id="cost" class="col-sm">
+            <label>Cost:</label>
+            <select @onchange="ShowFlightInfo" class="form-control">
+                <option>Any</option>
+                @foreach (var c in flights)
+                {
+                    <option value="@c.Price">@c.Price</option>
+                }
+            </select>
         </div>
 
         <div class="row-sm">
@@ -71,10 +102,10 @@
 
         <div class="row-sm">
             <label id="status">Status:</label>
-                <select class="form-control" style="text-align:left">
-                    <option>Active</option>
-                    <option>Inactive</option>
-                </select>
+            <select class="form-control" style="text-align:left">
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
         </div>
 
         <div style="margin-bottom: 25px" />
@@ -88,5 +119,12 @@
 
 @code
 {
+    FlightManager fm = new FlightManager();
+    List<Flight> flights = FlightManager.GetFlights();
+    List<Airport> airports = FlightManager.GetAirports();
 
+    string selectedFlight;
+
+    private void ShowFlightInfo(ChangeEventArgs f)
+    { selectedFlight = f.Value.ToString(); }
 }
